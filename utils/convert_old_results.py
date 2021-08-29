@@ -90,3 +90,10 @@ def convert_results(case):
     np.save(case.slope_stc,
             clusters_dataset.iz_prediction.loc[:, 'slope'].values)
     return clusters_dataset
+
+
+if __name__ == '__main__':
+    from casemanager import CaseManager
+    for subj in [1]:  # range(1, 8):
+        case = CaseManager(subj)
+        clusters = convert_results(case)
