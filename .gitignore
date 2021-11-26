@@ -132,3 +132,4 @@ dmypy.json
 .DS_Store
 case_info.yml
 *.json
+/.idea
