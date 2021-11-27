@@ -133,3 +133,4 @@ dmypy.json
 case_info.yml
 *.json
 /.idea
+/old(deprecated)
