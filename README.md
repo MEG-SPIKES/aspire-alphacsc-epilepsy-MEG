@@ -18,6 +18,12 @@ cd megspikes/
 pip install .
 ```
 
+Additionally, to plot paper images `Seaborn` package is needed.
+
+```bash
+pip install seaborn
+```
+
 All the pipelines are in the [analysis](analysis) folder. Additionally, `case_info.yml` file in the analysis folder is required. The structure of the `case_info.yml` file:
 
 ```yaml
