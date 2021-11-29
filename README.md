@@ -3,9 +3,16 @@ Plots and analysis for the paper "Data-driven approach for the delineation of th
 
 ## Quick start
 
+Create a new Anaconda environment:
+
+```bash
+conda create -n megspikes-pipeline python=3.7
+conda activate megspikes-pipeline
+```
+
 The easiest way to install the `megspikes` package is using pip. You should clone the repository and install all dependencies:
 
-```
+```bash
 git clone https://github.com/MEG-SPIKES/megspikes.git
 cd megspikes/
 pip install .
