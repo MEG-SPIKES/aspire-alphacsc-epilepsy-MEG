@@ -19,4 +19,6 @@ def setup_case_manager(subject: int) -> CaseManager:
     case.manual_detections = (
             case.basic_folders['MANUAL'] / f"{case_name}_manual_detections.npy")
 
+    case.detection_pdf_reports = case.case_meg / 'REPORTS'
+    case.detection_pdf_reports.mkdir(exist_ok=True)
     return case
