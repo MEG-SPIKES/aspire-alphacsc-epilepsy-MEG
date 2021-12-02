@@ -18,6 +18,12 @@ cd megspikes/
 pip install .
 ```
 
+To install the correct kernel for Jupyter Notebook use the following command:
+
+```bash
+python -m ipykernel install --user --name megspikes-pipeline
+```
+
 Additionally, to plot paper images `Seaborn` package is needed.
 
 ```bash
