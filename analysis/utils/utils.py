@@ -7,7 +7,6 @@ with open('case_info.yml', 'rt') as f:
 
 def setup_case_manager(subject: int) -> CaseManager:
     case_name = cases['case_name'][subject]
-
     case = CaseManager(root=cases['cases_path'],
                        case=case_name,
                        free_surfer=cases['free_surfer_path'])
