@@ -43,15 +43,15 @@ def convert_clusters_from_nix_format(case, raw):
     sensors = (nixfile.blocks['ROC'].data_frames['Atoms']['grad'] - 1) * -1 # because grad is 0 and mag is 1
     atoms = nixfile.blocks['ROC'].data_frames['Atoms']['atom']
 
-
     params = {
         'PrepareClustersDataset': {'detection_sfreq': 1000.}
     }
-    pipe = iz_prediction_pipeline(case, params, rewrite_previous_results=True)
 
     # create new clusters dataset
     case.cluster_dataset = case.cluster_dataset.with_name(
         f'{case.case}_clusters_results_converted.nc')
+
+    pipe = iz_prediction_pipeline(case, params, rewrite_previous_results=True)
     clusters, _ = pipe.fit_transform((detections, raw.copy()))
 
     # add slope information
@@ -72,8 +72,10 @@ def convert_clusters_from_nix_format(case, raw):
         dict(cluster_property='atom'))
 
     pc = ClusterSlopeViewer(clusters, case)
-    pc.fname_save_ds = str(pc.data.case.cluster_dataset.with_name(
-        f"{pc.data.case_name}_clusters_converted_manually_checked.nc"))
+    ds_path = case.cluster_dataset
+    if ds_path.is_file():
+        ds_path.unlink()
+    pc.fname_save_ds = str(ds_path)
 
     pc._rerun_iz_prediction()
     pc._save_dataset()
