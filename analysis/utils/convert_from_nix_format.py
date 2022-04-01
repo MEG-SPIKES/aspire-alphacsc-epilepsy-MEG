@@ -31,7 +31,7 @@ def convert_clusters_from_nix_format(case, raw):
     sensors = sensors[ind]
 
     detections = {
-        'spikes': (spikes / 200) * 1000,  # NOTE: spikes sfreq should be 1000Hz
+        'spikes': spikes,
         'spike_clusters': spike_clusters,
         'spike_sensors': sensors
     }
@@ -44,7 +44,8 @@ def convert_clusters_from_nix_format(case, raw):
     atoms = nixfile.blocks['ROC'].data_frames['Atoms']['atom']
 
     params = {
-        'PrepareClustersDataset': {'detection_sfreq': 1000.}
+        'PrepareClustersDataset': {'detection_sfreq': 200.},
+        'PredictIZClusters': {'smoothing_steps_one_cluster': 6}
     }
 
     # create new clusters dataset
