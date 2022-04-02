@@ -45,7 +45,7 @@ def convert_clusters_from_nix_format(case, raw):
 
     params = {
         'PrepareClustersDataset': {'detection_sfreq': 200.},
-        'PredictIZClusters': {'smoothing_steps_one_cluster': 6}
+        # 'PredictIZClusters': {'smoothing_steps_one_cluster': 6}
     }
 
     # create new clusters dataset
@@ -78,6 +78,7 @@ def convert_clusters_from_nix_format(case, raw):
         ds_path.unlink()
     pc.fname_save_ds = str(ds_path)
 
+    pc.smoothing_steps_one_cluster = 6
     pc._rerun_iz_prediction()
     pc._save_dataset()
     return clusters, pc
