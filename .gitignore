@@ -134,3 +134,4 @@ case_info.yml
 *.json
 /.idea
 /old(deprecated)
+/utils/__pycache__/
