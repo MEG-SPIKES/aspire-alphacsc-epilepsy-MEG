@@ -13,7 +13,7 @@ conda activate megspikes-pipeline
 The easiest way to install the `megspikes` package is using pip. You should clone the repository and install all dependencies:
 
 ```bash
-git clone https://github.com/MEG-SPIKES/megspikes.git
+git clone --depth 1 --branch v0.1.4 https://github.com/MEG-SPIKES/megspikes.git
 cd megspikes/
 pip install .
 ```
