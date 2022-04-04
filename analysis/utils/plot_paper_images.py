@@ -57,3 +57,39 @@ def stc_surfaces(subjects_dir, stc_resection, stc_manual=None, stc_peak=None, st
     plt.tight_layout()
     return fig
 
+
+def stc_surfaces_slope_peak(subjects_dir, stc_peak=None, stc_slope=None):
+    # pipeline roc - same as above but without resection and manual
+    fig, ax = plt.subplots(nrows=4, ncols=2*2, figsize=(25, 15), dpi=300)
+    surfer_kwargs = dict(hemi='split',  surface='inflated',  # 'white'
+                         views=['lat'], spacing='ico4',
+                         time_viewer=False, #  backend='mayavi',
+                         subjects_dir=subjects_dir, colormap='Greens', colorbar=False,
+                         background='w', foreground='k',  # , size=(500, 2000),
+                         smoothing_steps='nearest', alpha=1, verbose='error',
+                         add_data_kwargs={"fmin": 0.0, "fmid": 0.95, "fmax": 1.})
+    col = -1
+    cmaps = [ 'Reds', 'Reds']
+    titles = [ 'Automated (peak)', 'Automated (slope)']
+    stcs = [ stc_peak, stc_slope]
+    for stc, cmap, title in zip(stcs, cmaps, titles):
+        for hemi in ['rh', 'lh']:
+            col += 1
+            for row, view in enumerate(['lat', 'med', 'fro', 'par']):
+                ax[row, col].axis('off')
+                ax[row, col].get_xaxis().set_visible(False)
+                ax[row, col].get_yaxis().set_visible(False)
+                if not isinstance(stc, mne.SourceEstimate):
+                    continue
+                surfer_kwargs['hemi'] = hemi
+                surfer_kwargs['views'] = view
+                surfer_kwargs['colormap'] = cmap
+                brain = stc.plot(**surfer_kwargs)
+                im = brain.screenshot()
+                brain.close()
+                ax[row, col].imshow(im)
+                if view == 'lat':
+                    ax[row, col].set_title(f"{title} {hemi}")
+    plt.tight_layout()
+    return fig
+
