@@ -136,3 +136,4 @@ case_info.yml
 /old(deprecated)
 analysis/utils/__pycache__/
 utils/__pycache__/
+*.pyc
